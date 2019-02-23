@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <script>
+        /*Create a Vehicle class,No need to separate constructor,
+         Class act as a Constructor,thats why we equal variable inside the
+         class,without creating constructor*/
+        function Vehicle(type){
+
+            //increase vehicle count
+            Vehicle.VehicleCount++;
+
+            this.type = type;
+        }
+
+        //Static variable
+        Vehicle.VehicleCount = 0;
+
+        Vehicle.prototype.drive = function(){
+            console.log('Vehicle is driving');
+        };
+
+        var vehicle = new Vehicle('Toyota');
+
+        //Create a Car class
+        function Car(type){
+            Vehicle.call(this, type);
+        }
+
+        //Extend Vehicle class
+        Car.prototype = Object.create(Vehicle.prototype);
+
+        Car.prototype.constructor = Car;
+
+        Car.prototype.balanceWheels = function (){
+            console.log('Wheels are balanced');
+        };
+
+        var car1 = new Car('Nissan');
+        car1.drive();
+
+        car1.balanceWheels();
+        console.log(car1.type, Vehicle.VehicleCount);
+
+        let vehicleName = 'Toyota';
+
+        vehicleName = 'Nissan';
+
+        const COUNTRY = 'Japan';
+    </script>
+</body>
+</html>
